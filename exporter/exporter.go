@@ -45,5 +45,5 @@ func (e *defaultExporter) Run() error {
 		engine.GET(k, handlerWrapper(o))
 	}
 
-	return engine.Run()
+	return engine.Run(":8080")
 }

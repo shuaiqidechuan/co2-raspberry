@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	c := &serial.Config{Name: "/dev/serial0", Baud: 115200, ReadTimeout: time.Second * 5}
+	c := &serial.Config{Name: "/dev/serial0", Baud: 9600, ReadTimeout: time.Second * 5}
 	co2Sensor, err := sensor.Connect(c)
 	if err != nil {
 		log.Fatal(err)

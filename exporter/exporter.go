@@ -1,9 +1,11 @@
 package exporter
 
 import (
+	"database/sql"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/shuaiqidechuan/co2-raspberry/controller"
 )
 
 type Operate func() (interface{}, error)
@@ -41,6 +43,12 @@ func (e *defaultExporter) Run() error {
 	}
 
 	engine := gin.Default()
+	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3307)/project")
+	if err != nil {
+		panic(err)
+	}
+	d := controller.New(db)
+	d.RegistRouter(engine.Group("/api/v1"))
 	for k, o := range e.operates {
 		engine.GET(k, handlerWrapper(o))
 	}

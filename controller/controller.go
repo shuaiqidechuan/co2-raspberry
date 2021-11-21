@@ -37,9 +37,9 @@ func (d dioxideDensity) Add(c *gin.Context) {
 		return
 	}
 
-	dioxide, err := mysql.InsertDioxide(d.db, req.DioxideDensity, req.Status)
+	err := mysql.InsertDioxide(d.db, req.DioxideDensity, req.Status)
 	if err != nil {
 		log.Println(err)
 	}
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "dioxide": dioxide})
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK})
 }

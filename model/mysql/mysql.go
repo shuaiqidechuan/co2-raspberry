@@ -3,6 +3,7 @@ package mysql
 import (
 	"database/sql"
 	"errors"
+	"log"
 )
 
 const (
@@ -20,15 +21,17 @@ var (
 	}
 )
 
-func InsertDioxide(db *sql.DB, dioxideDensity string, status string) (string, error) {
+func InsertDioxide(db *sql.DB, dioxideDensity string, status string) error {
 	result, err := db.Exec(dioxideSQLString[mysqlDioxideInsert], dioxideDensity, status)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	if rows, _ := result.RowsAffected(); rows == 0 {
-		return "", errInvalidInsert
+	rows, _ := result.RowsAffected()
+	if rows == 0 {
+		return errInvalidInsert
 	}
+	log.Printf("insert successd")
+	return nil
 
-	return "", nil
 }

@@ -20,7 +20,7 @@ func New(db *sql.DB) *dioxideDensity {
 }
 
 func (d dioxideDensity) RegistRouter(r gin.IRouter) {
-	r.POST("/dioxide", d.Add)
+	r.GET("/dioxide", d.Add)
 }
 
 func (d dioxideDensity) Add(c *gin.Context) {
@@ -36,7 +36,6 @@ func (d dioxideDensity) Add(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest})
 		return
 	}
-
 	err := mysql.InsertDioxide(d.db, req.DioxideDensity, req.Status)
 	if err != nil {
 		log.Println(err)

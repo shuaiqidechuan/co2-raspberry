@@ -20,15 +20,15 @@ var (
 	}
 )
 
-func InsertDioxide(db *sql.DB, dioxideDensity string, status string) error {
-	result, err := db.Exec(dioxideSQLString[mysqlDioxideInsert], dioxideDensity)
+func InsertDioxide(db *sql.DB, dioxideDensity string, status string) (string, error) {
+	result, err := db.Exec(dioxideSQLString[mysqlDioxideInsert], dioxideDensity, status)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	if rows, _ := result.RowsAffected(); rows == 0 {
-		return errInvalidInsert
+		return "", errInvalidInsert
 	}
 
-	return nil
+	return "", nil
 }

@@ -16,11 +16,11 @@ var (
 var (
 	dioxideSQLString = []string{
 		// `INSERT INTO test (id) VALUES (?)`,
-		"INSERT INTO Co2_test (dioxide) VALUES (?)",
+		"INSERT INTO Co2_test (dioxide, status) VALUES (?, ?)",
 	}
 )
 
-func InsertDioxide(db *sql.DB, dioxideDensity int) error {
+func InsertDioxide(db *sql.DB, dioxideDensity string, status string) error {
 	result, err := db.Exec(dioxideSQLString[mysqlDioxideInsert], dioxideDensity)
 	if err != nil {
 		return err

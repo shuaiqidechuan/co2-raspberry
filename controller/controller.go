@@ -25,9 +25,9 @@ func (d dioxideDensity) RegistRouter(r gin.IRouter) {
 
 func (d dioxideDensity) Add(c *gin.Context) {
 	var req struct {
-		DioxideDensity int `json:"dioxide" binding:"required"`
+		DioxideDensity string `json:"data"`
 		// DeviceId       string `json:"deviceId" binding:"required"`
-		// Status         int `json: "status" binding:"required"`
+		Status string `json:"status"`
 		// ZoneName string `json:"zoneName" binding:"required"`
 	}
 
@@ -37,7 +37,7 @@ func (d dioxideDensity) Add(c *gin.Context) {
 		return
 	}
 
-	err := mysql.InsertDioxide(d.db, req.DioxideDensity)
+	err := mysql.InsertDioxide(d.db, req.DioxideDensity, req.Status)
 	if err != nil {
 		log.Println(err)
 	}

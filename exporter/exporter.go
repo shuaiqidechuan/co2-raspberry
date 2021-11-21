@@ -44,7 +44,7 @@ func (e *defaultExporter) Run() error {
 	}
 
 	engine := gin.Default()
-	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3307)/project")
+	db, err := sql.Open("mysql", "root:123456@tcp(192.168.0.40:3307)/project")
 	if err != nil {
 		panic(err)
 	}

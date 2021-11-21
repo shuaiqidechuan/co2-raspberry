@@ -16,12 +16,12 @@ var (
 var (
 	dioxideSQLString = []string{
 		// `INSERT INTO test (id) VALUES (?)`,
-		"INSERT INTO Co2_test (设备id, 状态, 地区名, `二氧化碳浓度(ppm)`) VALUES (?, ?, ?, ?)",
+		"INSERT INTO Co2_test (dioxide) VALUES (?)",
 	}
 )
 
-func InsertDioxide(db *sql.DB, dioxideDensity, status int, zoneName, deviceId string) error {
-	result, err := db.Exec(dioxideSQLString[mysqlDioxideInsert], deviceId, status, zoneName, dioxideDensity)
+func InsertDioxide(db *sql.DB, dioxideDensity int) error {
+	result, err := db.Exec(dioxideSQLString[mysqlDioxideInsert], dioxideDensity)
 	if err != nil {
 		return err
 	}
